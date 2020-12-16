@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS aimfit_workout_exercises;
