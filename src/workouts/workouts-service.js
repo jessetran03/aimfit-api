@@ -24,6 +24,27 @@ const WorkoutsService = {
       .where({ id })
       .update(newWorkoutFields)
   },
+  getExercisesForWorkout(knex, workout_id) {
+    return knex
+      .select('we.id', 'e.exercise_name', 'we.exercise_id')
+      .from('aimfit_workout_exercises as we')
+      .where({'we.workout_id': workout_id})
+      .join(
+        'aimfit_workouts as w',
+        'we.workout_id',
+        'w.id',
+      )
+      .join(
+        'aimfit_exercises as e',
+        'we.exercise_id',
+        'e.id',
+      )
+  },
+  deleteWorkoutExercise(knex, id) {
+    return knex('aimfit_workout_exercises')
+      .where({ id })
+      .delete()
+  },
 }
 
 module.exports = WorkoutsService

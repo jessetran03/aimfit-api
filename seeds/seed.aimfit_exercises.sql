@@ -1,3 +1,5 @@
+TRUNCATE aimfit_exercises;
+
 INSERT INTO aimfit_exercises (id, exercise_name)
 VALUES
   (1, 'Bench Press'),

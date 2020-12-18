@@ -2,7 +2,7 @@ const express = require('express')
 const WorkoutsService = require('./workouts-service')
 const xss = require('xss')
 const jsonParser = express.json()
-//const { requireAuth } = require('../middleware/jwt-auth')
+const { requireAuth } = require('../middleware/jwt-auth')
 
 const workoutsRouter = express.Router()
 
@@ -12,8 +12,15 @@ const serializeWorkout = workout => ({
   day: workout.day,
 })
 
+const serializeWorkoutExercise = exercise => ({
+  id: exercise.id,
+  exercise_name: xss(exercise.exercise_name),
+  exercise_id: exercise.exercise_id,
+})
+
 workoutsRouter
   .route('/')
+  //.all(requireAuth)
   .get((req, res, next) => {
     const db = req.app.get('db')
     WorkoutsService.getAllWorkouts(db)
@@ -62,7 +69,8 @@ workoutsRouter
       .catch(next)
   })
 
-workoutsRouter.route('/:workout_id/exercises/')
+workoutsRouter
+  .route('/:workout_id/exercises')
   //.all(requireAuth)
   .all(checkWorkoutExists)
   .get((req, res, next) => {
@@ -71,7 +79,21 @@ workoutsRouter.route('/:workout_id/exercises/')
       req.params.workout_id
     )
       .then(exercises => {
-        res.json(exercises.map(WorkoutsService.serializeWorkoutExercise))
+        res.json(exercises.map(serializeWorkoutExercise))
+      })
+      .catch(next)
+  })
+
+workoutsRouter
+  .route('/exercises/:workout_exercise_id')
+  .all(checkWorkoutExists)
+  .delete((req, res, next) => {
+    WorkoutsService.deleteWorkoutExercise(
+      req.app.get('db'),
+      req.params.workout_id
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
       })
       .catch(next)
   })

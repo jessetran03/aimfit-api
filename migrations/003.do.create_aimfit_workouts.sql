@@ -1,9 +1,11 @@
 CREATE TYPE week_day AS ENUM (
+  'Sunday',
   'Monday',
   'Tuesday',
   'Wednesday',
   'Thursday',
-  'Friday'
+  'Friday',
+  'Saturday'
 );
 
 CREATE TABLE aimfit_workouts (
