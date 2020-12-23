@@ -28,9 +28,17 @@ describe('Workouts Endpoints', function() {
 
   describe(`GET /api/workouts`, () => {
     context(`Given no workouts`, () => {
+      beforeEach('insert workouts', () =>
+      helpers.seedWorkoutsTables(
+        db,
+        testUsers,
+        testExercises,
+      )
+    )
       it(`responds with 200 and an empty list`, () => {
         return supertest(app)
           .get('/api/workouts')
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(200, [])
       })
     })
@@ -47,15 +55,18 @@ describe('Workouts Endpoints', function() {
       )
 
       it('responds with 200 and all of the workouts', () => {
-        const expectedWorkouts = testWorkouts.map(workout =>
+        const expectedWorkouts = testWorkouts
+        .filter(workout => workout.id == 1)
+        .map(workout =>
           helpers.makeExpectedWorkout(
             testUsers,
-            testWorkouts,
+            workout,
             testWorkoutExercises,
           )
         )
         return supertest(app)
           .get('/api/workouts')
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(200, expectedWorkouts)
       })
     })
@@ -78,6 +89,7 @@ describe('Workouts Endpoints', function() {
       it('removes XSS attack content', () => {
         return supertest(app)
           .get(`/api/workouts`)
+          .set('Authorization', helpers.makeAuthHeader(testUser))
           .expect(200)
           .expect(res => {
             expect(res.body[0].title).to.eql(expectedWorkout.title)
@@ -170,29 +182,5 @@ describe('Workouts Endpoints', function() {
           .expect(404, { error: `Workout doesn't exist` })
       })
     })
-
-    /*context('Given there are exercises for workout in the database', () => {
-      beforeEach('insert workouts', () =>
-        helpers.seedWorkoutsTables(
-          db,
-          testUsers,
-          testExercises,
-          testWorkouts,
-          testWorkoutExercises,
-        )
-      )
-
-      it('responds with 200 and the specified exercises', () => {
-        const workoutId = 1
-        const expectedWorkoutExercises = helpers.makeExpectedWorkoutExercises(
-          workoutId, testWorkoutExercises
-        )
-
-        return supertest(app)
-          .get(`/api/workouts/${workoutId}/exercises`)
-          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-          .expect(200, expectedWorkoutExercises)
-      })
-    })*/
   })
 })

@@ -1,12 +1,7 @@
 const ExercisesService = {
-  getAllExercises(knex, muscle) {
+  getAllExercises(knex) {
     return knex
       .select('*').from('aimfit_exercises')
-      .modify(function(queryBuilder) {
-        if (muscle) {
-          queryBuilder.where('muscle', muscle)
-        }
-      })
   },
   insertExercise(knex, newExercise) {
     return knex

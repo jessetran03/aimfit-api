@@ -15,8 +15,6 @@ usersRouter
           error: `Missing '${field}' in request body`
         })
 
-    // TODO: check user_name doesn't start with spaces
-
     const passwordError = UsersService.validatePassword(password)
 
     if (passwordError)

@@ -1,8 +1,6 @@
 const express = require('express')
 const WorkoutExercisesService = require('./workout-exercises-service')
-const xss = require('xss')
 const jsonParser = express.json()
-//const { requireAuth } = require('../middleware/jwt-auth')
 
 const workoutExercisesRouter = express.Router()
 
@@ -14,12 +12,11 @@ const serializeWorkoutExercise = exercise => ({
 
 workoutExercisesRouter
   .route('/')
-  //.all(checkWorkoutExerciseExists)
   .get((req, res, next) => {
     const db = req.app.get('db')
     WorkoutExercisesService.getAllWorkoutExercises(db)
-      .then(workout_exercises => {
-        res.json(workout_exercises.map(serializeWorkoutExercise))
+      .then(workoutExercises => {
+        res.json(workoutExercises.map(serializeWorkoutExercise))
       })
       .catch(next)
   })
@@ -46,7 +43,7 @@ workoutExercisesRouter
   })
 workoutExercisesRouter
   .route('/:workout_exercise_id')
-  //.all(checkWorkoutExerciseExists)
+  .all(checkWorkoutExerciseExists)
   .delete((req, res, next) => {
     WorkoutExercisesService.deleteWorkoutExercise(
       req.app.get('db'),

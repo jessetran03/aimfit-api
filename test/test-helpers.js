@@ -144,7 +144,7 @@ function makeWorkoutExercisesArray(workouts, exercises) {
 
 function makeExpectedWorkout(users, workout, workoutExercises=[]) {
   const user = users
-    .find(user => user.id === workout.user_id)
+    .find(user => user.id === workout.user_id) || {}
 
   const number_of_workout_exercises = workoutExercises
     .filter(workoutExercise => workoutExercise.workout_id === workout.id)
@@ -154,28 +154,21 @@ function makeExpectedWorkout(users, workout, workoutExercises=[]) {
     id: workout.id,
     day: workout.day,
     title: workout.title,
-    number_of_workout_exercises,
-    user: {
-      id: user.id,
-      user_name: user.user_name,
-      full_name: user.full_name,
-    },
   }
 }
 
-/*function makeExpectedWorkoutExercises(workoutId, workoutExercises) {
+function makeExpectedWorkoutExercises(workoutId, workoutExercises) {
   const expectedWorkoutExercises = workoutExercises
     .filter(workoutExercise => workoutExercise.workout_id === workoutId)
 
-  return expectedWorkoutExercises.map(workout => {
-    const workoutUser = users.find(user => user.id === workout.user_id)
+  return expectedWorkoutExercises.map(workout_exercise => {
     return {
       id: workout_exercise.id,
-      workout_id: workout.id,
-      exercise_id: exercise.id,
+      workout_id: workout_exercise._workout_id,
+      exercise_id: workout_exercise.exercise_id,
     }
   })
-}*/
+}
 
 function makeMaliciousWorkout(user) {
   const maliciousWorkout = {
@@ -255,13 +248,16 @@ function seedExercises(db, exercises) {
     )
 }
 
-function seedWorkoutsTables(db, users, exercises, workouts, workoutExercises=[]) {
+function seedWorkoutsTables(db, users, exercises = [], workouts = [], workoutExercises=[]) {
   // use a transaction to group the queries and auto rollback on any failure
   return db.transaction(async trx => {
     await seedUsers(trx, users)
     await seedExercises(trx, exercises)
     await trx.into('aimfit_workouts').insert(workouts)
     // update the auto sequence to match the forced id values
+    if(workouts.length == 0) {
+      return
+    }
     await trx.raw(
       `SELECT setval('aimfit_workouts_id_seq', ?)`,
       [workouts[workouts.length - 1].id],
@@ -300,7 +296,7 @@ module.exports = {
   makeWorkoutsArray,
   makeWorkoutExercisesArray,
   makeExpectedWorkout,
-  //makeExpectedWorkoutExercises,
+  makeExpectedWorkoutExercises,
   makeMaliciousWorkout,
 
   makeWorkoutsFixtures,
