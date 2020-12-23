@@ -20,10 +20,12 @@ const serializeWorkoutExercise = exercise => ({
 
 workoutsRouter
   .route('/')
-  //.all(requireAuth)
+  .all(requireAuth)
   .get((req, res, next) => {
     const db = req.app.get('db')
-    WorkoutsService.getAllWorkouts(db)
+    const user_id = req.user.id
+
+    WorkoutsService.getAllWorkouts(db, user_id)
       .then(workouts => {
         res.json(workouts.map(serializeWorkout))
       })
@@ -32,6 +34,7 @@ workoutsRouter
   .post(jsonParser, (req, res, next) => {
     const { title, day } = req.body
     const newWorkout = { title, day }
+    newWorkout.user_id = req.user.id
 
     for (const [key, value] of Object.entries(newWorkout))
       if (value == null)
@@ -53,7 +56,7 @@ workoutsRouter
 
 workoutsRouter
   .route('/:workout_id')
-  //.all(requireAuth)
+  .all(requireAuth)
   .all(checkWorkoutExists)
   .get((req, res) => {
     res.json(serializeWorkout(res.workout))
@@ -71,7 +74,7 @@ workoutsRouter
 
 workoutsRouter
   .route('/:workout_id/exercises')
-  //.all(requireAuth)
+  .all(requireAuth)
   .all(checkWorkoutExists)
   .get((req, res, next) => {
     WorkoutsService.getExercisesForWorkout(

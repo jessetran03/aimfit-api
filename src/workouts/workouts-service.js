@@ -1,6 +1,7 @@
 const WorkoutsService = {
-  getAllWorkouts(knex) {
+  getAllWorkouts(knex, user_id) {
     return knex.select('*').from('aimfit_workouts')
+    .where({ user_id })
   },
   insertWorkout(knex, newWorkout) {
     return knex

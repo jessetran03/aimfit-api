@@ -6,11 +6,6 @@ TRUNCATE
   aimfit_workouts,
   aimfit_users;
 
-INSERT INTO aimfit_users (user_name, full_name, password)
-VALUES
-  ('test', 'Test User', 'password'),
-  ('Russel', 'Russel Orhii', 'password2');
-
 INSERT INTO aimfit_exercises (id, exercise_name)
 VALUES
   (1, 'Bench Press'),
@@ -26,17 +21,19 @@ VALUES
   (11, 'Cable Row'),
   (12, 'Lat Pulldown');
 
-INSERT INTO aimfit_workouts (id, title, day)
+/*INSERT INTO aimfit_exercises (id, exercise_name, muscle)
 VALUES
-  (1, 'Push Workout', 'Monday'),
-  (2, 'Pull Workout', 'Tuesday'),
-  (3, 'Cardio Workout', 'Wednesday');
-
-INSERT INTO aimfit_workout_exercises (workout_id, exercise_id)
-VALUES
-  (1, 2),
-  (1, 3),
-  (1, 4),
-  (2, 3);
+  (1, 'Bench Press', 'Chest'),
+  (2, 'Pull up', 'Back'),
+  (3, 'Squat', 'Quads'),
+  (4, 'Deadlift', 'Hamstrings'),
+  (5, 'Dumbbell Curl', 'Biceps'),
+  (6, 'Shoulder Press', 'Shoulders'),
+  (7, 'Incline Bench Press', 'Chest'),
+  (8, 'Decline Bench Press', 'Chest'),
+  (9, 'Pec Fly', 'Chest'),
+  (10, 'Barbell Row', 'Back'),
+  (11, 'Cable Row', 'Back'),
+  (12, 'Lat Pulldown', 'Back');*/
 
   COMMIT;
