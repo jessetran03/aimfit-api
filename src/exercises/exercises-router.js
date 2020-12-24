@@ -7,6 +7,7 @@ const exercisesRouter = express.Router()
 const serializeExercise = exercise => ({
   id: exercise.id,
   exercise_name: xss(exercise.exercise_name),
+  muscle: exercise.id,
 })
 
 exercisesRouter

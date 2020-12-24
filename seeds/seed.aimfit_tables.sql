@@ -6,34 +6,30 @@ TRUNCATE
   aimfit_workouts,
   aimfit_users;
 
-INSERT INTO aimfit_exercises (id, exercise_name)
-VALUES
-  (1, 'Bench Press'),
-  (2, 'Pull up'),
-  (3, 'Squat'),
-  (4, 'Deadlift'),
-  (5, 'Dumbbell Curl'),
-  (6, 'Shoulder Press'),
-  (7, 'Incline Bench Press'),
-  (8, 'Decline Bench Press'),
-  (9, 'Pec Fly'),
-  (10, 'Barbell Row'),
-  (11, 'Cable Row'),
-  (12, 'Lat Pulldown');
-
-/*INSERT INTO aimfit_exercises (id, exercise_name, muscle)
+INSERT INTO aimfit_exercises (id, exercise_name, muscle)
 VALUES
   (1, 'Bench Press', 'Chest'),
-  (2, 'Pull up', 'Back'),
-  (3, 'Squat', 'Quads'),
-  (4, 'Deadlift', 'Hamstrings'),
-  (5, 'Dumbbell Curl', 'Biceps'),
-  (6, 'Shoulder Press', 'Shoulders'),
-  (7, 'Incline Bench Press', 'Chest'),
-  (8, 'Decline Bench Press', 'Chest'),
-  (9, 'Pec Fly', 'Chest'),
-  (10, 'Barbell Row', 'Back'),
-  (11, 'Cable Row', 'Back'),
-  (12, 'Lat Pulldown', 'Back');*/
+  (2, 'Incline Bench Press', 'Chest'),
+  (3, 'Decline Bench Press', 'Chest'),
+  (4, 'Cable Fly', 'Chest'),
+  (5, 'Pull up', 'Back'),
+  (6, 'Barbell Row', 'Back'),
+  (7, 'Cable Row', 'Back'),
+  (8, 'Lat Pulldown', 'Back'),
+  (9, 'Rope Pulldown', 'Triceps'),
+  (10, 'Dumbbell Overhead Extension', 'Triceps'),
+  (11, 'Dip', 'Triceps'),
+  (12, 'Barbell Curll', 'Biceps'),
+  (13, 'Dumbbell Curl', 'Biceps'),
+  (14, 'Shoulder Press', 'Shoulders'),
+  (15, 'Lateral Dumbbell Raise', 'Shoulders'),
+  (16, 'Face Pull', 'Shoulders'),
+  (17, 'Shrug', 'Traps'),
+  (18, 'Squat', 'Quads'),
+  (19, 'Leg Press', 'Quads'),
+  (20, 'Leg Extensions', 'Quads'),
+  (21, 'Deadlift', 'Hamstrings'),
+  (22, 'Hamstring Curl', 'Hamstrings'),
+  (23, 'Calf Raise', 'Calves');
 
   COMMIT;
