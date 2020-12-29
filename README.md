@@ -1,30 +1,58 @@
-# Express Boilerplate!
+# AimFit
+ * * *
+ 
 
-This is a boilerplate project used for starting new projects!
+ ## Live
+ --------------
 
-## Set up
+Demo: [https://aimfit-app.vercel.app/](https://aimfit-app.vercel.app/) </br>
+Client Repo: [https://github.com/jessetran03/aimfit](https://github.com/jessetran03/aimfit) </br>
+Server Repo: [https://github.com/jessetran03/aimfit-api](https://github.com/jessetran03/aimfit-api)
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## Summary
+ --------------
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+ AimFit is a web application that helps you to reach your fitness goals. The application allows the user to create their own workouts and customize the workouts to their needs. The user can also assign a day to each workout to help them organize their weekly workout plan.
 
-## Scripts
+## API Documentation
+ --------------
+ POST /api/auth/login </br>
+ POST /api/users </br>
+ GET /api/workouts </br>
+ POST /api/workouts </br>
+ GET /api/workouts/:workout_id </br>
+ DELETE /api/workouts/:workout_id </br>
+ GET /api/workouts/:workout_id/exercises </br>
+ DELETE /api/workouts/exercises/:workout_exercise_id </br>
+ GET /api/workout_exercises </br>
+ POST /api/workout_exercises </br>
+ DELETE /api/workout_exercises/:workout_exercise_id </br>
+ GET /api/exercies
 
-Start the application `npm start`
 
-Start nodemon for the application `npm run dev`
+ ## Screenshots
+  --------------
+ Landing Page:
+ ![Landing](images/landing-page.jpg)
 
-Run the tests `npm test`
+ Login Page:
+ ![Login](images/login-page.jpg)
 
-## Deploying
+ Workout Page:
+ ![WorkoutList](images/workout-list.jpg)
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+ Workout Exercises Page:
+ ![WorkoutExercises](images/workout-exercises.jpg)
 
-### Seed
+ Add Exercise Page:
+ ![AddExercises](images/add-exercises.jpg)
 
-psql -U dunder_mifflin -d aimfit -f ./seeds/seed.aimfit_tables.sql
+
+ ## Technologies Used
+ --------------
+
+ 1. JavaScript
+ 2. JWT
+ 3. Node
+ 4. Express
+ 5. Chai, Mocha
