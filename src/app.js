@@ -9,6 +9,7 @@ const workoutsRouter = require('./workouts/workouts-router')
 const workoutExercisesRouter = require('./workout-exercises/workout-exercises-router')
 const authRouter = require('./auth/auth-router')
 const usersRouter = require('./users/users-router')
+const exerciseLogRouter = require('./exercise-log/exercise-log-router')
 
 const app = express()
 
@@ -19,6 +20,8 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
+
+app.use('/api/exercise_log', exerciseLogRouter)
 
 app.use('/api/exercises', exercisesRouter)
 

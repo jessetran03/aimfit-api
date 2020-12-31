@@ -21,4 +21,34 @@ exercisesRouter
       .catch(next)
   })
 
+exercisesRouter
+  .route('/:exercise_id')
+  .all(checkExerciseExists)
+  .get((req, res, next) => {
+    res.json({
+      id: res.exercise.id,
+      exercise_name: res.exercise.exercise_name,
+      muscle: res.exercise.muscle,
+    })
+  })
+
+async function checkExerciseExists(req, res, next) {
+  try {
+    const exercise = await ExercisesService.getById(
+      req.app.get('db'),
+      req.params.exercise_id
+    )
+
+    if (!exercise)
+      return res.status(404).json({
+        error: `Exercise doesn't exist`
+      })
+
+    res.exercise = exercise
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = exercisesRouter

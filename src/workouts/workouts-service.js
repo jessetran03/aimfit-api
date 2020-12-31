@@ -2,6 +2,7 @@ const WorkoutsService = {
   getAllWorkouts(knex, user_id) {
     return knex.select('*').from('aimfit_workouts')
     .where({ user_id })
+    .orderBy('day', 'asc')
   },
   insertWorkout(knex, newWorkout) {
     return knex
