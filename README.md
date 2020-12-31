@@ -59,5 +59,3 @@ Server Repo: [https://github.com/jessetran03/aimfit-api](https://github.com/jess
  3. Node
  4. Express
  5. Chai, Mocha
-
- psql -U dunder_mifflin -d aimfit -f ./seeds/seed.aimfit_tables.sql
