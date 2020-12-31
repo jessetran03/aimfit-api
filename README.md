@@ -12,7 +12,7 @@ Server Repo: [https://github.com/jessetran03/aimfit-api](https://github.com/jess
 ## Summary
  --------------
 
- AimFit is a web application that helps you to reach your fitness goals. The application allows the user to create their own workouts and customize the workouts to their needs. The user can also assign a day to each workout to help them organize their weekly workout plan.
+ AimFit is a web application that helps you to reach your fitness goals. The application allows the user to create their own workouts and customize the workouts to their needs. The user can also assign a day to each workout to help them organize their weekly workout plan. The user can keep a log of the numbers they use for their exercises.
 
 ## API Documentation
  --------------
@@ -27,7 +27,11 @@ Server Repo: [https://github.com/jessetran03/aimfit-api](https://github.com/jess
  GET /api/workout_exercises </br>
  POST /api/workout_exercises </br>
  DELETE /api/workout_exercises/:workout_exercise_id </br>
- GET /api/exercies
+ GET /api/exercises </br>
+ GET /api/exercises/:exercise_id </br>
+ GET /api/exercise_log/:exercise_id
+ POST /api/exercise_log/:exercise_id
+ DELETE /api/exercise_log/:log_entry_id
 
 
  ## Screenshots
