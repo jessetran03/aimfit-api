@@ -1,6 +1,7 @@
 const express = require('express')
 const ExerciseLogService = require('./exercise-log-service')
 const jsonParser = express.json()
+const { requireAuth } = require('../middleware/jwt-auth')
 
 const exerciseLogRouter = express.Router()
 
@@ -14,6 +15,7 @@ const serializeLogEntry = logEntry => ({
 })
 exerciseLogRouter
   .route('/:exercise_id')
+  .all(requireAuth)
   .get((req, res, next) => {
     const db = req.app.get('db')
     ExerciseLogService.getExerciseLog(db, req.params.exercise_id)
@@ -46,6 +48,7 @@ exerciseLogRouter
 
 exerciseLogRouter
   .route('/:log_entry_id')
+  .all(requireAuth)
   .delete((req, res, next) => {
     ExerciseLogService.deleteLogEntry(
       req.app.get('db'),

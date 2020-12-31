@@ -1,6 +1,7 @@
 const express = require('express')
 const WorkoutExercisesService = require('./workout-exercises-service')
 const jsonParser = express.json()
+const { requireAuth } = require('../middleware/jwt-auth')
 
 const workoutExercisesRouter = express.Router()
 
@@ -12,6 +13,7 @@ const serializeWorkoutExercise = exercise => ({
 
 workoutExercisesRouter
   .route('/')
+  .all(requireAuth)
   .get((req, res, next) => {
     const db = req.app.get('db')
     WorkoutExercisesService.getAllWorkoutExercises(db)
