@@ -29,9 +29,9 @@ Server Repo: [https://github.com/jessetran03/aimfit-api](https://github.com/jess
  DELETE /api/workout_exercises/:workout_exercise_id </br>
  GET /api/exercises </br>
  GET /api/exercises/:exercise_id </br>
- GET /api/exercise_log/:exercise_id
- POST /api/exercise_log/:exercise_id
- DELETE /api/exercise_log/:log_entry_id
+ GET /api/exercise_log/:exercise_id </br>
+ POST /api/exercise_log/:exercise_id </br>
+ DELETE /api/exercise_log/:log_entry_id 
 
 
  ## Screenshots
