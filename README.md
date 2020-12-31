@@ -38,14 +38,17 @@ Server Repo: [https://github.com/jessetran03/aimfit-api](https://github.com/jess
  Login Page:
  ![Login](images/login-page.jpg)
 
- Workout Page:
+ Workout List Page:
  ![WorkoutList](images/workout-list.jpg)
 
  Workout Exercises Page:
  ![WorkoutExercises](images/workout-exercises.jpg)
 
- Add Exercise Page:
- ![AddExercises](images/add-exercises.jpg)
+ Exercise list Page:
+ ![ExerciseList](images/exercise-list.jpg)
+
+ Exercise Log Page:
+ ![ExerciseLog](images/exercise-log.jpg)
 
 
  ## Technologies Used
@@ -56,3 +59,5 @@ Server Repo: [https://github.com/jessetran03/aimfit-api](https://github.com/jess
  3. Node
  4. Express
  5. Chai, Mocha
+
+ psql -U dunder_mifflin -d aimfit -f ./seeds/seed.aimfit_tables.sql
