@@ -18,7 +18,10 @@ exerciseLogRouter
   .all(requireAuth)
   .get((req, res, next) => {
     const db = req.app.get('db')
-    ExerciseLogService.getExerciseLog(db, req.params.exercise_id)
+    const exercise_id = req.params.exercise_id
+    const user_id = req.user.id
+
+    ExerciseLogService.getExerciseLog(db, exercise_id, user_id)
       .then(logEntries => {
         res.json(logEntries.map(serializeLogEntry))
       })
@@ -27,6 +30,7 @@ exerciseLogRouter
   .post(jsonParser, (req, res, next) => {
     const { set_count, rep_count, weight_count} = req.body
     const newEntry = { set_count, rep_count, weight_count}
+    newEntry.user_id = req.user.id
 
     for (const [key, value] of Object.entries(newEntry))
       if (value == null)

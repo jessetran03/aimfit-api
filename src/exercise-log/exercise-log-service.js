@@ -1,8 +1,8 @@
 const ExerciseLogService = {
-  getExerciseLog(knex, exercise_id) {
+  getExerciseLog(knex, exercise_id, user_id) {
     return knex
       .select('*').from('aimfit_exercise_log')
-      .where({ exercise_id })
+      .where({ user_id, exercise_id })
       .orderBy('date_logged', 'desc')
   },
   insertLogEntry(knex, newLogEntry) {
