@@ -76,7 +76,7 @@ workoutsRouter
     const { title, day } = req.body
     const workoutToBeUpdated = { title, day }
 
-    WorkoutsService.updateWorkout(db, req.body.id, workoutToBeUpdated)
+    WorkoutsService.updateWorkout(db, req.params.workout_id, workoutToBeUpdated)
       .then(workout => {
         res
           .status(200)
