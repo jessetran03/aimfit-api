@@ -71,6 +71,19 @@ workoutsRouter
       })
       .catch(next)
   })
+  .patch(jsonParser, (req, res, next) => {
+    const db = req.app.get('db')
+    const { title, day } = req.body
+    const workoutToBeUpdated = { title, day }
+
+    WorkoutsService.updateWorkout(db, req.body.id, workoutToBeUpdated)
+      .then(workout => {
+        res
+          .status(200)
+          .json(serializeWorkout(workout))
+      })
+      .catch(next)
+  })
 
 workoutsRouter
   .route('/:workout_id/exercises')
